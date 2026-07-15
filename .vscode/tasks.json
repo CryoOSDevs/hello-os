@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Configure (CMake)",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["-S", "${workspaceFolder}", "-B", "${workspaceFolder}/build"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Build OS Image",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "${workspaceFolder}/build"],
+            "dependsOn": ["Configure (CMake)"],
+            "group": { "kind": "build", "isDefault": true },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "Run in QEMU",
+            "type": "shell",
+            "command": "qemu-system-i386",
+            "args": ["-drive", "format=raw,file=${workspaceFolder}/build/os-image.bin"],
+            "dependsOn": ["Build OS Image"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Launch QEMU (paused, GDB stub)",
+            "type": "shell",
+            "command": "qemu-system-i386",
+            "args": [
+                "-drive", "format=raw,file=${workspaceFolder}/build/os-image.bin",
+                "-s", "-S"
+            ],
+            "dependsOn": ["Build OS Image"],
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^.*$",
+                    "endsPattern": "^.*$"
+                }
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        }
+    ]
+}

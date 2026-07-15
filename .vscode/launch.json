@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug OS in QEMU",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/kernel.elf",
+            "miDebuggerServerAddress": "localhost:1234",
+            "MIMode": "gdb",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Launch QEMU (paused, GDB stub)",
+            "setupCommands": [
+                {
+                    "description": "Use Intel-flavor disassembly",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Break at kmain",
+                    "text": "-break-insert kmain",
+                    "ignoreFailures": true
+                }
+            ],
+            "externalConsole": false
+        }
+    ]
+}

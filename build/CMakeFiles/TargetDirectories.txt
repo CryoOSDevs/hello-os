@@ -1,0 +1,3 @@
+/home/andrey-vorobey/Desktop/hello-os/build/CMakeFiles/os_image.dir
+/home/andrey-vorobey/Desktop/hello-os/build/CMakeFiles/edit_cache.dir
+/home/andrey-vorobey/Desktop/hello-os/build/CMakeFiles/rebuild_cache.dir
